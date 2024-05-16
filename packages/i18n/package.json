@@ -1,0 +1,12 @@
+{
+  "name": "@core/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": "./messages/en.json",
+    "./en": "./messages/en.json",
+    "./fa": "./messages/fa.json"
+  }
+}

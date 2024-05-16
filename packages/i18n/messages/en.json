@@ -1,0 +1,10 @@
+{
+  "Index": {
+    "title": "Hello world!",
+    "age": "Age"
+  },
+  "Core": {
+    "submit": "Submit",
+    "in-progress": "in progress..."
+  }
+}
