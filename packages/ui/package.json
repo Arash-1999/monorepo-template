@@ -3,13 +3,23 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
+    "./button": "./src/button.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component"
+  },
+  "dependencies": {
+    "@lib/global-modal": "workspace:*",
+    "@lib/chart": "workspace:*"
+  },
+  "peerDependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.16",
+    "stylis": "^4.3.2",
+    "stylis-plugin-rtl": "^2.1.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
