@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx"
+    "./button": "./src/button.tsx",
+    "./icon": "./src/icon.tsx",
+    "./inputs": "./src/inputs/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
