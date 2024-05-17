@@ -68,3 +68,28 @@ export default getRequestConfig(async ({ locale }) => ({
 4. move your entire app to `[locale]`
 
 5. create react context to provide you locale(or direction) to your app
+
+### Add type definition
+
+create `types.d.ts` in your package root and add this file to your `tsconfig.json` include section.
+
+```typescript
+import en from "@core/i18n/en"; 
+ 
+type Messages = typeof en;
+ 
+declare global {
+  // Use type safe message keys with `next-intl`
+  interface IntlMessages extends Messages {}
+}
+```
+you can read more about how it works in typescript module augmentation.
+
+### Client components
+
+for accessing to your translation in client components you can use `NextIntlClientProvider` to provide messages.
+
+recommended message structure:
+  - separate pages (e.g. /about)
+  - separate group of pages in layout (e.g. /dashboard/)
+  - core translations for entire app

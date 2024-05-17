@@ -3,16 +3,26 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@core/i18n": "workspace:*",
+    "@lib/chart": "workspace:*",
+    "@lib/global-modal": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.16",
     "next": "^14.1.1",
+    "next-intl": "^3.11.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "stylis": "^4.3.2",
+    "stylis-plugin-rtl": "^2.1.1"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",
