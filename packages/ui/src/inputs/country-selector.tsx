@@ -30,6 +30,7 @@ const CountrySelector = forwardRef<HTMLInputElement | HTMLTextAreaElement, Count
       onChange={(e) => {
         onChange(e.target.value);
       }}
+      label="Country"
       inputRef={ref}
       InputProps={{ 
         endAdornment: (
