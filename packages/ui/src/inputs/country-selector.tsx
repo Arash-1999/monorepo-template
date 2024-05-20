@@ -8,10 +8,11 @@ import Modal from "./modal";
 type CountrySelectorProps = {
   onChange: (v: string) => void;
   value: string;
+  label: string;
 };
 
 // TODO: handle validation for countries (autocomplete/select/visual)
-const CountrySelector = forwardRef<HTMLInputElement | HTMLTextAreaElement, CountrySelectorProps>(({ onChange, value }, ref) => {
+const CountrySelector = forwardRef<HTMLInputElement | HTMLTextAreaElement, CountrySelectorProps>(({ onChange, value, label }, ref) => {
   const openVisualMap = () => {
     dispatchOpenModal({
       render: () => (
@@ -30,6 +31,7 @@ const CountrySelector = forwardRef<HTMLInputElement | HTMLTextAreaElement, Count
       onChange={(e) => {
         onChange(e.target.value);
       }}
+      label={label}
       inputRef={ref}
       InputProps={{ 
         endAdornment: (
