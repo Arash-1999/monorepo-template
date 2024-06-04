@@ -1,36 +1,38 @@
 import { Observer } from "@core/pub-sub";
-import { useEffect, useMemo, Fragment, type ReactNode } from "react";
-import { type UseFormReturn, useFieldArray } from "react-hook-form";
-import { Card, type FormAction } from "./types";
+import { useEffect, useMemo, Fragment, } from "react";
+import { useFieldArray, } from "react-hook-form";
+import type { ReactNode } from "react";
+import type { UseFormReturn, FieldValues, ArrayPath, } from "react-hook-form";
+import type { FormAction } from "./types/internal";
+import type { Card } from "./types";
 import { formBuilderSubject } from "./pub-sub";
 import { renderInput } from "./render-input";
 
-type ListFormProps = Omit<Card, "isList" | "title" | "action"> & {
-  formMethods: UseFormReturn;
+type ListFormProps<TFormValues extends FieldValues> = Omit<Card<TFormValues>, "isList" | "title" | "action"> & {
+  formMethods: UseFormReturn<TFormValues>;
   createContainer: (nodes: ReactNode, index: number) => ReactNode;
 };
 
-const ListForm = ({ formMethods, createContainer, name, inputs}: ListFormProps) => {
+const ListForm = <TFormValues extends FieldValues,>({ formMethods, createContainer, name, inputs}: ListFormProps<TFormValues>) => {
   // TODO: change component id
   const componentId = name;
-  // const componentId = useMemo(() => {
-  //   return path ? `${path}.${name}` : name;
-  // }, [path, name]);
-
-  const { fields, ...methods } = useFieldArray({
-    name: componentId,
+  const {
+    fields,
+    ...methods
+  } = useFieldArray({
+    name: componentId as ArrayPath<TFormValues>,
     control: formMethods.control,
   });
 
-  const observerAction = (formAction: FormAction) => {
+  const observerAction = (formAction: FormAction<TFormValues>) => {
     if(formAction !== null) {
       switch (formAction["method"]) {
         case "append":
-          methods["append"](formAction["value"]);
+          methods["append"](...formAction["value"]);
           break;
 
         case "prepend":
-          methods["prepend"](formAction["value"]);
+          methods["prepend"](...formAction["value"]);
           break;
 
         case "insert":
@@ -50,7 +52,7 @@ const ListForm = ({ formMethods, createContainer, name, inputs}: ListFormProps) 
           break;
 
         case "replace":
-          methods["replace"](formAction["value"]);
+          methods["replace"](...formAction["value"]);
           break;
 
         case "remove":
@@ -64,7 +66,7 @@ const ListForm = ({ formMethods, createContainer, name, inputs}: ListFormProps) 
     return new Observer<
       FormAction,
       (formAction: FormAction) => void
-    >(observerAction, componentId);
+    >(observerAction as (formAction: FormAction) => void, componentId);
   }, []);
 
   useEffect(() => {

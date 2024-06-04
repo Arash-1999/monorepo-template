@@ -1,6 +1,8 @@
-import { Fragment, type ReactNode } from "react";
+import { Fragment, } from "react";
+import type { ReactNode } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { type FormBuilderProps, type CardCreatorProps } from "./types";
+import type { FieldValues, } from "react-hook-form";
+import type { BuilderProps, CardCreatorProps } from "./types";
 import { Grid, Box, Paper } from "@mui/material";
 import ListForm from "./list-form";
 import { renderInput } from "./render-input";
@@ -14,9 +16,9 @@ const sx = {
     gap: "8px",
   }
 };
-const createCard = ({
+const createCard = <TFormValues extends FieldValues>({
   formMethods, title, action, name,
-}: CardCreatorProps) => {
+}: CardCreatorProps<TFormValues>) => {
   return (nodes: ReactNode, ) => {
     return (
       <Grid item {...gridProps.item}>
@@ -43,13 +45,14 @@ const createCard = ({
   };
 };
 
-const FormBuilder = ({onSubmit, cards, formId}: FormBuilderProps) => {
-  const form = useForm({
-    // defaultValues: {
-    //   data: {
-    //     price: [12, 18],
-    //   }
-    // } as any,
+const FormBuilder = <TFormValues extends FieldValues, >({
+  onSubmit,
+  cards,
+  formId,
+  defaultValues,
+}: BuilderProps<TFormValues>) => {
+  const form = useForm<TFormValues>({
+    ...(defaultValues ? {defaultValues: defaultValues,} : {}),
   });
 
   return (

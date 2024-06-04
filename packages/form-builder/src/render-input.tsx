@@ -1,14 +1,10 @@
-import { type ReactNode } from "react";
-import { type Input } from "./types";
-import { type UseFormReturn } from "react-hook-form";
+import type { ReactNode } from "react";
+import type { Input } from "./types";
+import type { UseFormReturn, FieldValues, } from "react-hook-form";
 import ListForm from "./list-form";
 import { Grid } from "@mui/material";
 import CountryInput from "./components/country-input";
-import RadioInput from "./components/radio";
 import TextInput from "./components/text";
-import CheckboxInput from "./components/checkbox";
-import RatingInput from "./components/rating";
-import SliderInput from "./components/slider";
 
 const createContainer = (nodes: ReactNode) => {
   return (
@@ -18,11 +14,12 @@ const createContainer = (nodes: ReactNode) => {
   );
 };
 
-const renderInput = (formMethods: UseFormReturn, input: Input, name: string) => {
+const renderInput = <T extends FieldValues>(formMethods: UseFormReturn<T>, input: Input<T>, name: string) => {
   let result: ReactNode;
 
   const path = `${name}.${input.name}`;
 
+  // TODO: use path as Path<TFormValues> in commonProps instead of every single input file
   const commonProps = {
     name: path,
     label: input.label,
@@ -38,37 +35,6 @@ const renderInput = (formMethods: UseFormReturn, input: Input, name: string) => 
     case "country":
       result = (
         <CountryInput key={path} {...commonProps} />
-      );
-      break;
-
-    case "radio":
-      result = (
-        <RadioInput key={path} options={input.options} {...commonProps} />
-      );
-      break;
-
-    case "checkbox":
-      result = (
-        <CheckboxInput key={path} {...commonProps} />
-      );
-      break;
-
-    case "rating":
-      result = (
-        <RatingInput key={path} {...commonProps} />
-      );
-      break;
-
-    case "slider":
-      result = (
-        <SliderInput
-          key={path}
-          min={input.min}
-          max={input.max}
-          count={input.count}
-          step={input.step}
-          {...commonProps}
-        />
       );
       break;
 

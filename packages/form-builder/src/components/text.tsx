@@ -1,17 +1,20 @@
 import { Controller } from "react-hook-form";
-import type { UseFormReturn } from "react-hook-form";
+import type { FieldValues, Path } from "react-hook-form";
 import { TextField } from "@mui/material";
+import { InputBase } from "../types/internal";
 
-type Props = {
-  formMethods: UseFormReturn;
-  name: string;
+type TextInputProps<TFormValues extends FieldValues> = InputBase<TFormValues> & {
   label: string;
 };
 
-const TextInput = ({ formMethods, name, label }: Props) => {
+const TextInput = <TFormValues extends FieldValues,>({
+  formMethods,
+  name,
+  label,
+}: TextInputProps<TFormValues>) => {
   return (
     <Controller
-      name={name}
+      name={name as Path<TFormValues>}
       control={formMethods.control}
       render={({ field: { ref, value, onChange, onBlur, name, disabled }, }) => (
         <TextField
