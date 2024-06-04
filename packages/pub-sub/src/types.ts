@@ -1,5 +1,3 @@
-import React from "react";
-
 export type ActionBase<T> = (s: T) => void;
 export type DefaultAction<T> = React.Dispatch<React.SetStateAction<T>>;
 
