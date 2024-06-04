@@ -22,12 +22,14 @@ type BaseInput = {
 * map/location(leaflet)
 */
 
+/* Generated Input Types (start) */
 type TextInput = {
   type: "text";
 };
 type CountryInput = {
   type: "country";
 };
+/* Generated Input Types (end) */
 
 type ListInput<T extends FieldValues> = {
   type: "list";

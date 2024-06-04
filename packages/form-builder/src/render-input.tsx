@@ -3,8 +3,10 @@ import type { Input } from "./types";
 import type { UseFormReturn, FieldValues, } from "react-hook-form";
 import ListForm from "./list-form";
 import { Grid } from "@mui/material";
+/* import Inputs (start) */
 import CountryInput from "./components/country-input";
 import TextInput from "./components/text";
+/* import Inputs (end) */
 
 const createContainer = (nodes: ReactNode) => {
   return (
@@ -25,7 +27,9 @@ const renderInput = <T extends FieldValues>(formMethods: UseFormReturn<T>, input
     label: input.label,
     formMethods,
   }
+  // TODO: handle other input types in types file
   switch (input.type) {
+    /* Generated Inputs (start) */
     case "text":
       result = (
         <TextInput key={path} {...commonProps} />
@@ -37,8 +41,7 @@ const renderInput = <T extends FieldValues>(formMethods: UseFormReturn<T>, input
         <CountryInput key={path} {...commonProps} />
       );
       break;
-
-    // TODO: handle other input types in types file
+    /* Generated Inputs (end) */
 
     case "list":
       result = (
@@ -56,6 +59,7 @@ const renderInput = <T extends FieldValues>(formMethods: UseFormReturn<T>, input
       break;
 
     default:
+      // TODO: create default input component
       result = (
         <></>
       );

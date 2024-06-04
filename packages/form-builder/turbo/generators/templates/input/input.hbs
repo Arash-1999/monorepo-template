@@ -1,0 +1,27 @@
+import { Fragment } from "react";
+import { Controller } from "react-hook-form";
+import type { FieldValues, Path } from "react-hook-form";
+import type { InputBase } from "../types/internal";
+
+type {{ pascalCase name }}Props<TFormValues extends FieldValues> = InputBase<TFormValues> & {
+  // TODO: add your component custom props
+};
+
+const {{ pascalCase name }}Input = <TFormValues extends FieldValues,>({
+  formMethods,
+  name,
+}: {{ pascalCase name }}Props<TFormValues>) => {
+  return (
+    <Controller
+      control={formMethods.control}
+      name={name as Path<TFormValues>}
+      render={({ field: { ref, onChange, onBlur, disabled, value, }, }) => (
+        <Fragment>
+          {/* TODO: add your component body */}
+        </Fragment>
+      )}
+    />
+  );
+};
+
+export default {{ pascalCase name }}Input;
