@@ -1,11 +1,26 @@
 import type { Context, ReactNode, } from "react";
 import type { Entries, DataDefault } from "./utils";
 
+type FallbackRoute = {
+  type: "redirect";
+  to: string;
+};
+type FallbackFnAsync = {
+  type: "function-async";
+  fn: () => Promise<void>;
+}
+type FallbackFn = {
+  type: "function";
+  fn: () => void;
+}
+type Fallback = FallbackRoute | 
+  FallbackFnAsync |
+  FallbackFn;
 // external and internal config types(it adds canResolve field in parsing config)
 type GuardConfigBase<TStore, TExtend extends boolean = false> = {
   [key in keyof TStore]: {
     name: key;
-    fallback: string;
+    fallback: Fallback;
     // PERF: if it has no deps fn should be like () => Promise<TStore[key]>;
     fn: (data: Partial<TStore>) => Promise<TStore[key]>;
     deps?: Exclude<keyof TStore, key>[];

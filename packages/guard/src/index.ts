@@ -173,13 +173,17 @@ class GuardCreator<TStore extends DataDefault> implements GuardCreatorClass<TSto
             });
           } else {
             const fallback = this.config[guardKey].fallback;
-            // TODO: handle all type of fallbacks (e.g. function, route, ...)
-            if (typeof fallback === "string") {
-              navigate(fallback);
+
+            if(fallback.type === "redirect") {
+              navigate(fallback.to);
+            }else if (fallback.type === "function") {
+              fallback.fn();
+              this.setLoading(false, ["GLOBAL_LOADING"]);
+            }else if (fallback.type === "function-async") {
+              await fallback.fn();
+              this.setLoading(false, ["GLOBAL_LOADING"]);
             }
-            // else if (typeof fallback === "function") {
-            //   fallback(guardResult);
-            // }
+
             return Promise.reject();
           }
         }

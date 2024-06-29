@@ -23,7 +23,6 @@ const Provider = function <TStore extends DataDefault>({
             return true;
           },
           () => {
-            // TODO: stop loading after fallback execution
             return false;
           }
         );
