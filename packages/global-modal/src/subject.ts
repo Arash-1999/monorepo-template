@@ -1,5 +1,7 @@
 import { SubjectBase } from "@core/pub-sub";
-import { ModalState, SingleModal } from "./types";
+import { ModalState, } from "./types/internals";
+import type { SingleModal } from "./types";
+import { TRANSITION_DURATION } from "./constants";
 
 class ModalSubject extends SubjectBase<ModalState> {
   constructor(defaultValue: ModalState) {
@@ -7,8 +9,17 @@ class ModalSubject extends SubjectBase<ModalState> {
   }
 
   openModal(d: SingleModal) {
-    this.state = { render: [...this.state.render, d] };
+    this.state = {
+      render: [
+        ...this.state.render,
+        { ...d, status: "OPENNING", }
+      ]
+    };
     this.notify();
+
+    setTimeout(() => {
+      // TODO: change OPENNING status to open then notify
+    }, TRANSITION_DURATION);
   }
   closeModal() {
     this.state = { render: this.state.render.slice(0, -1) };

@@ -6,8 +6,7 @@ import {
   modalSubject,
   dispatchCloseModal,
 } from "./subject";
-import { ModalState } from "./types";
-// @ts-ignore
+import { ModalState } from "./types/internals";
 import styles from "./styles.module.css";
 import { useClickAwayListener } from "./hooks/use-click-away";
 
@@ -61,7 +60,7 @@ const GlobalModal = () => {
             <div
               key={i}
               tabIndex={-1}
-              className={styles.modals__item}
+              className={`${styles.modals__item}`}
               ref={i === modal.render.length - 1 ? modalRef : null}
             >
               {el.render()}
