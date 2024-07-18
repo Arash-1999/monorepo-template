@@ -10,6 +10,7 @@ type ModalStatus = keyof typeof modalStatus;
 
 interface IntSingleModal extends SingleModal{
   status: ModalStatus;
+  // id: string;
 }
 
 interface ModalState {
@@ -19,4 +20,5 @@ interface ModalState {
 export type {
   IntSingleModal,
   ModalState,
+  ModalStatus,
 }

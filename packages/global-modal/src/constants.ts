@@ -1,1 +1,2 @@
-export const TRANSITION_DURATION = 75;
+export const TRANSITION_IN_DURATION = 75;
+export const TRANSITION_OUT_DURATION = 250;
