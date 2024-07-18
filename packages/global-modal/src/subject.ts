@@ -48,9 +48,21 @@ class ModalSubject extends SubjectBase<ModalState> {
   }
 
   closeAllModals() {
-    // TODO: change logic to use status and trnasition
-    this.state = { render: [] };
-    this.notify();
+    const last = this.state.render.pop();
+    
+    if(last) {
+      last.status = "CLOSING";
+      this.state = {
+        render: [last],
+      };
+      this.notify();
+
+      setTimeout(() => {
+        this.state = { render: [] };
+        this.notify();
+      }, TRANSITION_OUT_DURATION);
+    }
+
   }
 }
 
