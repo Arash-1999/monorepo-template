@@ -19,7 +19,7 @@ interface TransitionProps {
 const Transition: FC<TransitionProps> = ({ children, status }) => {
   return (
     <div
-      className={`${styles.transition_container} ${status === "OPEN" ? `${styles.transition} ${styles.visible}` : ""}`}
+      className={`${styles.transition} ${status === "OPEN" ? styles.grow : ""}`}
     >
       {children}
     </div>
@@ -73,18 +73,14 @@ const GlobalModal = () => {
       ? (
         <div className={styles.modals}>
           {modal.render.map((el, i) => (
-            <Transition
-              status={el.status}
-              key={i}
+            <div
+              key={`modal-${i}`}
+              tabIndex={-1}
+              className={`${styles.modals__item} ${el.status === "OPEN" ? styles.transition : ""}`}
+              ref={i === modal.render.length - 1 ? modalRef : null}
             >
-              <div
-                tabIndex={-1}
-                className={`${styles.modals__item}`}
-                ref={i === modal.render.length - 1 ? modalRef : null}
-              >
-                {el.render()}
-              </div>
-            </Transition>
+              {el.render()}
+            </div>
           ))}
         </div>
       )
