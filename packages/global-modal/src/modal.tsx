@@ -1,30 +1,15 @@
 "use client";
 import React from "react";
-import type { ReactNode, FC } from "react";
 import { createPortal } from "react-dom";
 import { Observer } from "@core/pub-sub";
 import {
   modalSubject,
   dispatchCloseModal,
 } from "./subject";
-import { ModalState, ModalStatus } from "./types/internals";
+import { ModalState } from "./types/internals";
 import styles from "./styles.module.css";
 import { useClickAwayListener } from "./hooks/use-click-away";
-
-// TODO: move/remvoe transition component
-interface TransitionProps {
-  children: ReactNode;
-  status: ModalStatus;
-}
-const Transition: FC<TransitionProps> = ({ children, status }) => {
-  return (
-    <div
-      className={`${styles.transition} ${status === "OPEN" ? styles.grow : ""}`}
-    >
-      {children}
-    </div>
-  );
-};
+import { cls } from "./utils";
 
 const GlobalModal = () => {
   const [modal, setModal] = React.useState<ModalState>({ render: [] });
@@ -76,7 +61,10 @@ const GlobalModal = () => {
             <div
               key={`modal-${i}`}
               tabIndex={-1}
-              className={`${styles.modals__item} ${el.status === "OPEN" ? styles.transition : ""}`}
+              className={cls({
+                [styles.modals__item]: true,
+                [styles.transition]: el.status === "OPEN",
+              })}
               ref={i === modal.render.length - 1 ? modalRef : null}
             >
               {el.render()}
