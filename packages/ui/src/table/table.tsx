@@ -16,7 +16,7 @@ const Table = <TRow extends string>({
   headers,
   id,
 }: TableProps<TRow>) => {
-  const isMobile = useMatchMedia(`(max-width: ${config.breakpoint || "768px"};)`);
+  const isMobile = useMatchMedia(`(max-width: ${config.breakpoint || "768px"})`);
 
   const sortHandler = (key: string) => () => {
     console.log(key);

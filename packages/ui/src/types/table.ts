@@ -17,6 +17,7 @@ type Header<TRow extends string> = {
     id: TRow;
     name: string;
     hidden?: boolean;
+    primary?: boolean;
     sortable?: {
         key: string;
     };

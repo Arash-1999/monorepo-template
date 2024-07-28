@@ -6,7 +6,10 @@
     "./button": "./src/button.tsx",
     "./icon": "./src/icon.tsx",
     "./inputs": "./src/inputs/index.ts",
-    "./theme": "./src/theme/index.ts"
+    "./theme": "./src/theme/index.ts",
+    "./table": "./src/table/index.ts",
+    "./types": "./src/types/index.ts",
+    "./types/table": "./src/types/table.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
