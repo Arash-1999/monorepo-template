@@ -42,140 +42,142 @@ const bounce = keyframes`
 
 type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 const breakpoint: Record<Breakpoint, { value: string; next?: Breakpoint }> = {
-	xs: { value: "0px", next: "sm" },
-	sm: { value: "40rem", next: "md" },
-	md: { value: "48rem", next: "lg" },
-	lg: { value: "64rem", next: "xl" },
-	xl: { value: "80rem", next: "xxl" },
-	xxl: { value: "96rem" },
+  xs: { value: "0px", next: "sm" },
+  sm: { value: "40rem", next: "md" },
+  md: { value: "48rem", next: "lg" },
+  lg: { value: "64rem", next: "xl" },
+  xl: { value: "80rem", next: "xxl" },
+  xxl: { value: "96rem" },
 };
 
 const base = {
-	atomic: {
-		"100": "#E6EAED",
-		"200": "#B5C1CA",
-		"400": "#8498A6",
-		"600": "#596E7B",
-		"800": "#35424A",
-		"1000": "#3C4A53",
-	},
-	"caribbean-green": {
-		"100": "#",
-		"200": "#",
-		"400": "#",
-		"600": "#",
-		"800": "#",
-		"1000": "#00BEA5",
-	},
-	yellow: {
-		"100": "#FCF3DB",
-		"200": "#F9E6B8",
-		"400": "#F6DA94",
-		"600": "#F3CD71",
-		"800": "#F2C75F",
-		"1000": "#F0C14D",
-	},
-	pink: {
-		"100": "#fcdde3",
-		"200": "#f9bac7",
-		"400": "#f798ac",
-		"600": "#f47590",
-		"800": "#f26482",
-		"1000": "#f15374",
-	},
-	"gray-blue": {
-		"100": "#",
-		"200": "#",
-		"400": "#",
-		"600": "#",
-		"800": "#",
-		"1000": "#",
-	},
+  atomic: {
+    "100": "#E6EAED",
+    "200": "#B5C1CA",
+    "400": "#8498A6",
+    "600": "#596E7B",
+    "800": "#35424A",
+    "1000": "#3C4A53",
+  },
+  "caribbean-green": {
+    "100": "#",
+    "200": "#",
+    "400": "#",
+    "600": "#",
+    "800": "#",
+    "1000": "#00BEA5",
+  },
+  yellow: {
+    "100": "#FCF3DB",
+    "200": "#F9E6B8",
+    "400": "#F6DA94",
+    "600": "#F3CD71",
+    "800": "#F2C75F",
+    "1000": "#F0C14D",
+  },
+  pink: {
+    "100": "#fcdde3",
+    "200": "#f9bac7",
+    "400": "#f798ac",
+    "600": "#f47590",
+    "800": "#f26482",
+    "1000": "#f15374",
+  },
+  "gray-blue": {
+    "100": "#",
+    "200": "#",
+    "400": "#",
+    "600": "#",
+    "800": "#",
+    "1000": "#",
+  },
 };
 
 const lightTheme = {
-	mode: "light",
-	color: {
-		primary: {
-			light: base["caribbean-green"][1000],
-			main: base["caribbean-green"][1000],
-			dark: base["caribbean-green"][1000],
-			contrastText: "#fff",
-		},
-		secondary: {},
-		background: {
-			button: {
-				primary: base["caribbean-green"][1000],
-				secondary: base["gray-blue"][400],
-				tertiary: base["atomic"][400],
-				disabled: "",
-			},
-			input: {},
-		},
-		text: {
-			primary: base["atomic"][1000],
-			secondary: base["gray-blue"][400],
-			tertiary: base["atomic"][400],
-			disabled: "",
+  mode: "light",
+  color: {
+    primary: {
+      light: base["caribbean-green"][1000],
+      main: base["caribbean-green"][1000],
+      dark: base["caribbean-green"][1000],
+      contrastText: "#fff",
+    },
+    secondary: {},
+    background: {
+      button: {
+        primary: base["caribbean-green"][1000],
+        secondary: base["gray-blue"][400],
+        tertiary: base["atomic"][400],
+        disabled: "",
+      },
+      input: {},
+    },
+    text: {
+      primary: base["atomic"][1000],
+      secondary: base["gray-blue"][400],
+      tertiary: base["atomic"][400],
+      disabled: "",
 
-			button: {
-				primary: base["atomic"][1000],
-				secondary: base["gray-blue"][400],
-				tertiary: base["atomic"][400],
-				disabled: "",
-			},
-			input: {},
-		},
-		divider: base["atomic"][200],
-	},
-	radius: {
-		xs: "0.25rem",
-		sm: "0.125rem",
-		md: "0.375rem",
-		lg: "0.5rem",
-		xl: "0.75rem",
-		xxl: "1rem",
-	},
-	shadow: {},
-	animation: {
-		bounce,
-		ping,
-		pulse,
-		spin,
-	},
-	breakpoint: {
-		keys: Object.entries(breakpoint).reduce<
-			Partial<Record<Breakpoint, string>>
-		>((acc, cur) => {
-			acc[cur[0] as Breakpoint] = cur[1].value;
-			return acc;
-		}, {}),
+      button: {
+        primary: base["atomic"][1000],
+        secondary: base["gray-blue"][400],
+        tertiary: base["atomic"][400],
+        disabled: "",
+      },
+      input: {},
+    },
+    divider: base["atomic"][200],
+  },
+  radius: {
+    xs: "0.25rem",
+    sm: "0.125rem",
+    md: "0.375rem",
+    lg: "0.5rem",
+    xl: "0.75rem",
+    xxl: "1rem",
+  },
+  shadow: {
+    // TODO: add shadows
+  },
+  animation: {
+    bounce,
+    ping,
+    pulse,
+    spin,
+  },
+  breakpoint: {
+    keys: Object.entries(breakpoint).reduce<
+      Partial<Record<Breakpoint, string>>
+    >((acc, cur) => {
+      acc[cur[0] as Breakpoint] = cur[1].value;
+      return acc;
+    }, {}),
 
-		up: (key: Breakpoint) => `@media (min-width: ${breakpoint[key].value})`,
-		down: (key: Breakpoint) => `@media (max-width: ${breakpoint[key].value})`,
-		between: (k1: Breakpoint, k2: Breakpoint) =>
-			`@media (min-width: ${breakpoint[k1].value}) and (max-width: ${breakpoint[k2].value})`,
-		only: (key: Breakpoint) => {
-			if (breakpoint[key].next) {
-				const nextKey = breakpoint[key].next;
-				return `@media (min-width: ${breakpoint[key].value}) and (max-width: ${breakpoint[nextKey].value})`;
-			} else {
-				return `@media (min-width: ${breakpoint[key].value})`;
-			}
-		},
-		not: (key: Breakpoint) => {
-			if (breakpoint[key].next) {
-				const nextKey = breakpoint[key].next;
-				return `@media (max-width: ${breakpoint[key].value}) and (min-width: ${breakpoint[nextKey].value})`;
-			} else {
-				return `@media (max-width: ${breakpoint[key].value})`;
-			}
-		},
-	},
+    up: (key: Breakpoint) => `@media (min-width: ${breakpoint[key].value})`,
+    down: (key: Breakpoint) => `@media (max-width: ${breakpoint[key].value})`,
+    between: (k1: Breakpoint, k2: Breakpoint) =>
+      `@media (min-width: ${breakpoint[k1].value}) and (max-width: ${breakpoint[k2].value})`,
+    only: (key: Breakpoint) => {
+      if (breakpoint[key].next) {
+        const nextKey = breakpoint[key].next as Breakpoint;
+        return `@media (min-width: ${breakpoint[key].value}) and (max-width: ${breakpoint[nextKey].value})`;
+      } else {
+        return `@media (min-width: ${breakpoint[key].value})`;
+      }
+    },
+    not: (key: Breakpoint) => {
+      if (breakpoint[key].next) {
+        const nextKey = breakpoint[key].next as Breakpoint;
+        return `@media (max-width: ${breakpoint[key].value}) and (min-width: ${breakpoint[nextKey].value})`;
+      } else {
+        return `@media (max-width: ${breakpoint[key].value})`;
+      }
+    },
+  },
 };
 
 const darkTheme = {
-	mode: "dark",
+  mode: "dark",
 };
 
 export { lightTheme, darkTheme };

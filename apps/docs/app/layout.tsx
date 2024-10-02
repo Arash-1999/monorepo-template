@@ -2,6 +2,8 @@
 import ThemeHandler from "@/shared/components/theme";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import "normalize.css";
+import "./global.css";
 
 const poppins = Poppins({
 	subsets: ["latin-ext"],
